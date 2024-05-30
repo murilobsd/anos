@@ -1,7 +1,19 @@
 [package]
-name = "anos"
-version = "0.1.0"
-edition = "2021"
+authors      = ["Murilo Ijanc' <mbsd@m0x.ru>"]
+description  = "A study on operating systems"
+edition      = "2021"
+homepage     = "https://m0x.ru"
+license      = "MIT"
+name         = "anos"
+repository   = "https://git.sr.ht/~mbsd/anos"
+rust-version = "1.78"
+version      = "0.1.0"
+
+[lints.clippy]
+all        = { level = "warn" }
+empty_loop = { level = "allow", priority = 1 }
+
+[dependencies]
 
 # disable the genration of unwinding
 [profile.dev]
@@ -10,4 +22,3 @@ panic = "abort"
 [profile.release]
 panic = "abort"
 
-[dependencies]

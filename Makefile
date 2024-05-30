@@ -11,7 +11,7 @@ clippy:
 	cargo clippy --all -- -D warnings
 
 build: fmt clippy
-	cargo build -target thumbv7em-none-eabihf
+	cargo build --target thumbv7em-none-eabihf
 
 test: build
 	cargo test --all -- --nocapture

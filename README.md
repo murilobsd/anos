@@ -5,5 +5,11 @@
 Bare metal environment is the *thumbv7em-none-eabihf*.
 
 ```console
-rustup target add thumbv7em-none-eabihf
+make setup
+```
+
+and build:
+
+```console
+make build
 ```
