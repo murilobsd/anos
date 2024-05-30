@@ -1,8 +1,8 @@
 # AnOS
 
-The name of the project is based on the suffix of my wife personal name.
+![logo](assets/logo.png "logo")
 
-[WIP]
+> The name of the project is based on the suffix of my wife personal name. [WIP]
 
 ## Build
 
@@ -17,3 +17,9 @@ and build:
 ```console
 make build
 ```
+
+## License
+
+AnOS is distributed under the terms of the ISC license.
+
+See [LICENSE](LICENSE)
