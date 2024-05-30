@@ -1,7 +1,9 @@
-.PHONY: help fmt clippy build run
+.PHONY: help fmt clippy build run usb
 
 all: build
 
+usb:
+	dd if=target/x86_64-anos/debug/bootimage-anos.bin of=/dev/sdX && sync
 boot:
 	qemu-system-x86_64 -drive format=raw,file=target/x86_64-anos/debug/bootimage-anos.bin
 
