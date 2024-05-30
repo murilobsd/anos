@@ -1,7 +1,6 @@
-all: test build
+.PHONY: help fmt clippy build test watch
 
-setup:
-	rustup target add thumbv7em-none-eabihf
+all: test build
 
 fmt:
 	cargo fmt --all
@@ -10,15 +9,14 @@ clippy:
 	cargo fmt --all -- --check
 	cargo clippy --all -- -D warnings
 
-build: fmt clippy
-	cargo build --target thumbv7em-none-eabihf
+build:
+	cargo build
 
 test: build
 	cargo test --all -- --nocapture
 
 watch: build
 	cargo watch -x 'test --all -- --nocapture'
-
 
 help:
 	cat Makefile

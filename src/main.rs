@@ -27,5 +27,7 @@ fn panic(_info: &PanicInfo) -> ! {
 #[no_mangle] // Disable name mangling
 pub extern "C" fn _start() -> ! {
     // Tell de compiler that it should use C calling convetion
+    // this function is the entry point, since the linker looks for a function
+    // a named `_start` by default
     loop {}
 }
