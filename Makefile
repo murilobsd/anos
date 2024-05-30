@@ -1,6 +1,6 @@
-.PHONY: help fmt clippy build test watch
+.PHONY: help fmt clippy build run
 
-all: test build
+all: build
 
 boot:
 	qemu-system-x86_64 -drive format=raw,file=target/x86_64-anos/debug/bootimage-anos.bin
@@ -18,11 +18,8 @@ clippy:
 build:
 	cargo bootimage
 
-test: build
-	cargo test --all -- --nocapture
-
-watch: build
-	cargo watch -x 'test --all -- --nocapture'
+run:
+	cargo run
 
 help:
 	cat Makefile
