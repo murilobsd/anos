@@ -1,0 +1,13 @@
+[package]
+name = "anos"
+version = "0.1.0"
+edition = "2021"
+
+# disable the genration of unwinding
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+
+[dependencies]
