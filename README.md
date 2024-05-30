@@ -2,7 +2,7 @@
 
 ![logo](assets/logo.png "logo")
 
-> The name of the project is based on the suffix of my wife personal name. [WIP]
+> The name of the project is based on the prefix of my wife personal name. [WIP]
 
 requirements:
 
