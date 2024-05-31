@@ -31,7 +31,9 @@ pub extern "C" fn _start() -> ! {
     // Tell de compiler that it should use C calling convetion
     // this function is the entry point, since the linker looks for a function
     // a named `_start` by default
-    vga_buffer::print_somenthing();
+    use core::fmt::Write;
+    vga_buffer::WRITER.lock().write_str("Hello again").unwrap();
+    write!(vga_buffer::WRITER.lock(), ", some numbers: {} {}", 42, 1.337).unwrap();
 
     loop {}
 }
