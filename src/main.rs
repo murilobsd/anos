@@ -15,9 +15,9 @@
 #![no_std] // Disable links to the standard library
 #![no_main] // Don't want to use the normal entry point
 
-use core::panic::PanicInfo;
+mod vga_buffer;
 
-static HELLO: &[u8] = b"Hello World!";
+use core::panic::PanicInfo;
 
 /// This function is called on panic.
 #[panic_handler]
@@ -31,14 +31,7 @@ pub extern "C" fn _start() -> ! {
     // Tell de compiler that it should use C calling convetion
     // this function is the entry point, since the linker looks for a function
     // a named `_start` by default
-    let vga_buffer = 0xb8000 as *mut u8; // cast raw pointer
-
-    for (i, &byte) in HELLO.iter().enumerate() {
-        unsafe {
-            *vga_buffer.offset(i as isize * 2) = byte;
-            *vga_buffer.offset(i as isize * 2 + 1) = 0xb; // this is a light cyan
-        }
-    }
+    vga_buffer::print_somenthing();
 
     loop {}
 }
