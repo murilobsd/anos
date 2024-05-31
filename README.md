@@ -9,6 +9,10 @@ requirements:
 * [bootimage][bootimage]
 * [qemu][qemu]
 
+Exit mouse Qemu: ctrl+alt+g
+Full Qemu: ctrl+alt+f
+Quit Qemu: ctrl+alt+q
+
 ## Build
 
 ```console
