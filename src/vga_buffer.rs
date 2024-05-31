@@ -12,10 +12,19 @@
 // ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 // OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+use core::fmt;
+
 use volatile::Volatile;
 
 const BUFFER_HEIGHT: usize = 25;
 const BUFFER_WIDTH: usize = 80;
+
+impl fmt::Write for Writer {
+    fn write_str(&mut self, s: &str) -> fmt::Result {
+        self.write_string(s);
+        Ok(())
+    }
+}
 
 pub struct Writer {
     column_position: usize,
@@ -45,21 +54,20 @@ impl Writer {
                 let col = self.column_position;
 
                 let color_code = self.color_code;
-                self.buffer.chars[row][col].write(ScreenChar{
-                    ascii_character: byte,
-                    color_code,
-                });
+                self.buffer.chars[row][col]
+                    .write(ScreenChar { ascii_character: byte, color_code });
                 self.column_position += 1;
             }
         }
     }
 
     fn new_line(&mut self) {
-        todo!()
+        unimplemented!()
     }
 }
 
 pub fn print_somenthing() {
+    use core::fmt::Write;
     let mut writer = Writer {
         column_position: 0,
         color_code: ColorCode::new(Color::Red, Color::Black),
@@ -67,8 +75,8 @@ pub fn print_somenthing() {
     };
 
     writer.write_byte(b'H');
-    writer.write_string("ello ");
-    writer.write_string("World!");
+    writer.write_string("ello! ");
+    write!(writer, "The numbers are {} and {}", 42, 1.0/3.0).unwrap();
 }
 
 #[repr(transparent)]
@@ -112,5 +120,5 @@ pub enum Color {
     LightRed = 12,
     Pink = 13,
     Yellow = 14,
-    White = 15
+    White = 15,
 }
