@@ -12,42 +12,23 @@
 // ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 // OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-#![no_std]
-#![no_main]
-#![feature(custom_test_frameworks)]
-#![test_runner(anos::test_runner)]
-#![reexport_test_harness_main = "test_main"]
+use lazy_static::lazy_static;
+use x86_64::structures::idt::{InterruptDescriptorTable, InterruptStackFrame};
 
-use core::panic::PanicInfo;
+use crate::println;
 
-use anos::println;
-
-#[no_mangle]
-pub extern "C" fn _start() -> ! {
-    println!("Hello World{}", "!");
-
-    anos::init();
-
-    // invoke a breakpoint exception
-    x86_64::instructions::interrupts::int3();
-
-    #[cfg(test)]
-    test_main();
-
-    println!("It did not crash!");
-    loop {}
+lazy_static! {
+    static ref IDT: InterruptDescriptorTable = {
+        let mut idt = InterruptDescriptorTable::new();
+        idt.breakpoint.set_handler_fn(breakpoint_handler);
+        idt
+    };
 }
 
-/// This function is called on panic.
-#[cfg(not(test))]
-#[panic_handler]
-fn panic(info: &PanicInfo) -> ! {
-    println!("{}", info);
-    loop {}
+pub fn init_dt() {
+    IDT.load();
 }
 
-#[cfg(test)]
-#[panic_handler]
-fn panic(info: &PanicInfo) -> ! {
-    anos::test_panic_handler(info)
+extern "x86-interrupt" fn breakpoint_handler(stack_frame: InterruptStackFrame) {
+    println!("EXCEPTION: BREAKPOINT\n{:#?}", stack_frame);
 }
