@@ -1,34 +1,38 @@
 [package]
-authors      = ["Murilo Ijanc' <mbsd@m0x.ru>"]
-description  = "A study on operating systems"
-edition      = "2021"
-homepage     = "https://m0x.ru"
-license      = "MIT"
-name         = "anos"
-repository   = "https://git.sr.ht/~mbsd/anos"
+authors = ["Murilo Ijanc' <mbsd@m0x.ru>"]
+description = "A study on operating systems"
+edition = "2021"
+homepage = "https://m0x.ru"
+license = "MIT"
+name = "anos"
+repository = "https://git.sr.ht/~mbsd/anos"
 rust-version = "1.78"
-version      = "0.1.0"
+version = "0.1.0"
 
 [lints.clippy]
-all        = { level = "warn" }
+all = { level = "warn" }
 empty_loop = { level = "allow", priority = 1 }
 
 [dependencies]
-bootloader  = "0.9"
+bootloader = "0.9"
 lazy_static = { version = "1.4.0", features = ["spin_no_std"] }
-spin        = "0.9.8"
-uart_16550  = "0.3.0"
-volatile    = "0.2.6"
-x86_64      = "0.15.1"
+spin = "0.9.8"
+uart_16550 = "0.3.0"
+volatile = "0.2.6"
+x86_64 = "0.15.1"
 
 [[test]]
-name    = "should_panic"
+name = "should_panic"
 harness = false
 
 [package.metadata.bootimage]
-test-args              = [
-    "-device", "isa-debug-exit,iobase=0xf4,iosize=0x04", "-serial",
-    "stdio", "-display", "none"
+test-args = [
+  "-device",
+  "isa-debug-exit,iobase=0xf4,iosize=0x04",
+  "-serial",
+  "stdio",
+  "-display",
+  "none",
 ]
 test-success-exit-code = 33 # (0x10 << 1) | 1 --> qemu
-test-timeout           = 300 # (in seconds)
+test-timeout = 300 # (in seconds)
