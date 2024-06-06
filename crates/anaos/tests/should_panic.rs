@@ -14,27 +14,28 @@
 
 #![no_std]
 #![no_main]
-#![feature(custom_test_frameworks)]
-#![test_runner(anos::test_runner)]
-#![reexport_test_harness_main = "test_main"]
 
 use core::panic::PanicInfo;
 
-use anos::println;
+use anaos::{exit_qemu, QemuExitCode};
+use ana_serial::{serial_println, serial_print};
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    test_main();
-
+    should_fail();
+    serial_println!("[test did not panic]");
+    exit_qemu(QemuExitCode::Failed);
     loop {}
 }
 
-#[panic_handler]
-fn panic(info: &PanicInfo) -> ! {
-    anos::test_panic_handler(info)
+fn should_fail() {
+    serial_print!("should_panic::should_fail...\t");
+    assert_eq!(0, 1);
 }
 
-#[test_case]
-fn test_println() {
-    println!("test_println output");
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> ! {
+    serial_println!("[ok]");
+    exit_qemu(QemuExitCode::Success);
+    loop {}
 }

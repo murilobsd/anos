@@ -14,26 +14,42 @@
 
 #![no_std]
 #![no_main]
+#![feature(custom_test_frameworks)]
+#![test_runner(anaos::test_runner)]
+#![reexport_test_harness_main = "test_main"]
 
-use anos::{exit_qemu, serial_print, serial_println, QemuExitCode};
 use core::panic::PanicInfo;
+
+use ana_vga::println;
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    should_fail();
-    serial_println!("[test did not panic]");
-    exit_qemu(QemuExitCode::Failed);
+    println!("Hello World{}", "!");
+
+    anaos::init();
+
+    // trigger a page fault
+    unsafe {
+        *(0xdeadbeef as *mut u8) = 42;
+    }
+
+    #[cfg(test)]
+    test_main();
+
+    println!("It did not crash!");
     loop {}
 }
 
-fn should_fail() {
-    serial_print!("should_panic::should_fail...\t");
-    assert_eq!(0, 1);
-}
-
+/// This function is called on panic.
+#[cfg(not(test))]
 #[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
-    serial_println!("[ok]");
-    exit_qemu(QemuExitCode::Success);
+fn panic(info: &PanicInfo) -> ! {
+    println!("{}", info);
     loop {}
+}
+
+#[cfg(test)]
+#[panic_handler]
+fn panic(info: &PanicInfo) -> ! {
+    anaos::test_panic_handler(info)
 }

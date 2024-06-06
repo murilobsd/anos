@@ -1,0 +1,37 @@
+[package]
+name                   = "anaos"
+authors.workspace      = true
+description.workspace  = true
+edition.workspace      = true
+homepage.workspace     = true
+license.workspace      = true
+repository.workspace   = true
+rust-version.workspace = true
+version.workspace      = true
+
+[dependencies]
+ana_vga        = { workspace = true }
+ana_serial     = { workspace = true }
+ana_interrupts = { workspace = true }
+
+x86_64     = { workspace = true }
+bootloader = "0.9"
+
+[lints]
+workspace = true
+
+[[test]]
+name    = "should_panic"
+harness = false
+
+[package.metadata.bootimage]
+test-args = [
+  "-device",
+  "-display",
+  "-serial",
+  "isa-debug-exit,iobase=0xf4,iosize=0x04",
+  "none",
+  "stdio",
+]
+test-success-exit-code = 33 # (0x10 << 1) | 1 --> qemu
+test-timeout = 300 # (in seconds)

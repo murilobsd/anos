@@ -3,14 +3,41 @@
 version = 3
 
 [[package]]
-name = "anos"
+name = "ana_interrupts"
 version = "0.1.0"
 dependencies = [
- "bootloader",
+ "ana_serial",
+ "ana_vga",
+ "lazy_static",
+ "x86_64",
+]
+
+[[package]]
+name = "ana_serial"
+version = "0.1.0"
+dependencies = [
  "lazy_static",
  "spin 0.9.8",
  "uart_16550",
+]
+
+[[package]]
+name = "ana_vga"
+version = "0.1.0"
+dependencies = [
+ "lazy_static",
+ "spin 0.9.8",
  "volatile 0.2.7",
+]
+
+[[package]]
+name = "anaos"
+version = "0.1.0"
+dependencies = [
+ "ana_interrupts",
+ "ana_serial",
+ "ana_vga",
+ "bootloader",
  "x86_64",
 ]
 
