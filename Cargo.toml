@@ -20,6 +20,7 @@ empty_loop = { level = "allow", priority = 1 }
 ana_vga        = { version = "0.1.0", path = "crates/ana_vga" }
 ana_serial     = { version = "0.1.0", path = "crates/ana_serial" }
 ana_interrupts = { version = "0.1.0", path = "crates/ana_interrupts" }
+ana_tests      = { version = "0.1.0", path = "crates/ana_tests" }
 
 lazy_static = { version = "1.4.0", features = ["spin_no_std"] }
 spin        = "0.9.8"

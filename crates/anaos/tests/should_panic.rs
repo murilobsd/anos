@@ -17,8 +17,8 @@
 
 use core::panic::PanicInfo;
 
-use anaos::{exit_qemu, QemuExitCode};
-use ana_serial::{serial_println, serial_print};
+use ana_serial::{serial_print, serial_println};
+use ana_tests::{exit_qemu, QemuExitCode};
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {

@@ -13,6 +13,7 @@ version.workspace      = true
 ana_vga        = { workspace = true }
 ana_serial     = { workspace = true }
 ana_interrupts = { workspace = true }
+ana_tests      = { workspace = true }
 
 x86_64     = { workspace = true }
 bootloader = "0.9"

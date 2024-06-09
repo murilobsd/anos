@@ -12,7 +12,9 @@ version.workspace      = true
 [dependencies]
 ana_vga    = { workspace = true }
 ana_serial = { workspace = true }
-x86_64     = { workspace = true }
+ana_tests  = { workspace = true }
+
+x86_64 = { workspace = true }
 
 lazy_static = { workspace = true }
 

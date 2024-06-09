@@ -7,6 +7,7 @@ name = "ana_interrupts"
 version = "0.1.0"
 dependencies = [
  "ana_serial",
+ "ana_tests",
  "ana_vga",
  "lazy_static",
  "x86_64",
@@ -22,9 +23,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "ana_tests"
+version = "0.1.0"
+dependencies = [
+ "ana_serial",
+ "x86_64",
+]
+
+[[package]]
 name = "ana_vga"
 version = "0.1.0"
 dependencies = [
+ "ana_tests",
+ "bootloader",
  "lazy_static",
  "spin 0.9.8",
  "volatile 0.2.7",
@@ -36,6 +47,7 @@ version = "0.1.0"
 dependencies = [
  "ana_interrupts",
  "ana_serial",
+ "ana_tests",
  "ana_vga",
  "bootloader",
  "x86_64",

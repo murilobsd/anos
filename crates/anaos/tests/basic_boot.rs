@@ -15,7 +15,7 @@
 #![no_std]
 #![no_main]
 #![feature(custom_test_frameworks)]
-#![test_runner(anaos::test_runner)]
+#![test_runner(ana_tests::test_runner)]
 #![reexport_test_harness_main = "test_main"]
 
 use core::panic::PanicInfo;
@@ -31,7 +31,7 @@ pub extern "C" fn _start() -> ! {
 
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
-    anaos::test_panic_handler(info)
+    ana_tests::test_panic_handler(info)
 }
 
 #[test_case]
